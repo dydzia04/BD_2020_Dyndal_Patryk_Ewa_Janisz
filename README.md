@@ -1,10 +1,10 @@
 # BD_2020_Dyndal_Patryk_Ewa_Janisz
 
-1. Typ projektu: kursowy
-2. Projekt realizowany w zespole
-3. Baza danych zaprojektowana dla sklepu internetowego. 
-Baza zawiera tabele: Użytkownicy, Role, Zamówienia, Koszyki, Przesyłki, Wydziały, Magazyny, Kategorie, Przedmioty, Opinie.
-Relacje między tabelami: 
+1. Typ projektu: kursowy<br/>
+2. Projekt realizowany w zespole<br/>
+3. Baza danych zaprojektowana dla sklepu internetowego. <br/>
+Baza zawiera tabele: Użytkownicy, Role, Zamówienia, Koszyki, Przesyłki, Wydziały, Magazyny, Kategorie, Przedmioty, Opinie.<br/>
+Relacje między tabelami: <br/>
 Użytkownik -> Rola - Wiele do jednego - Każdy użytkownik może mieć tylko 1 rolę <br/>
 Użytkownik -> Opinia - Jeden do wielu - Jeden użytkownik może dodać wiele opinii <br/>
 Użytkownik -> Zamówienie - Jeden do wielu - Jeden użytkownik może mieć wiele zamówień <br/>
