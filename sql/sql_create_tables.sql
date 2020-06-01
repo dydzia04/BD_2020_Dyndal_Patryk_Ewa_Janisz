@@ -10,7 +10,12 @@ ALTER TABLE Projekt ADD (
     
 CREATE TABLE Pozwolenia (
     ID_Pozwolenia                   NUMBER          NOT NULL UNIQUE,
-    Typ                             VARCHAR(128)    NOT NULL UNIQUE
+    Nazwa                           VARCHAR(128)    NOT NULL UNIQUE,
+    Create_Issue                    NUMBER(1)       NOT NULL,
+    Edit_own_Issue                  NUMBER(1)       NOT NULL,
+    Delete_own_Issue                NUMBER(1)       NOT NULL,
+    Edit_any_Issue                  NUMBER(1)       NOT NULL,
+    Delete_any_Issue                NUMBER(1)       NOT NULL
 );
 
 ALTER TABLE Pozwolenia ADD (
@@ -19,7 +24,6 @@ ALTER TABLE Pozwolenia ADD (
 
 CREATE TABLE Role (
     ID_Roli                         NUMBER          NOT NULL UNIQUE,
-    Nazwa                           VARCHAR(32)     NOT NULL UNIQUE,
     ID_Pozwolenia                   NUMBER          NOT NULL UNIQUE
 );
 
@@ -34,7 +38,7 @@ CREATE TABLE Uzytkownik (
     Nazwa_Wyswietlana               VARCHAR(32)     NOT NULL UNIQUE,
     Email                           VARCHAR(254)    NOT NULL,
     Zezwol_na_powiadomienia_email   NUMBER(1)       NOT NULL,
-    ID_Rola                         NUMBER          NOT NULL UNIQUE
+    ID_Rola                         NUMBER          NOT NULL
 );
 
 ALTER TABLE Uzytkownik ADD (
