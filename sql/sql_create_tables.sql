@@ -22,6 +22,18 @@ ALTER TABLE Pozwolenia ADD (
     CONSTRAINT                      PK_Pozwolenia   PRIMARY KEY (ID_Pozwolenia)
 );
 
+CREATE TABLE Uzytkownik (
+    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
+    Imie_Nazwisko                   VARCHAR(64)     NOT NULL,
+    Nazwa_Wyswietlana               VARCHAR(32)     NOT NULL UNIQUE,
+    Email                           VARCHAR(254)    NOT NULL,
+    Zezwol_na_powiadomienia_email   NUMBER(1)       NOT NULL
+);
+
+ALTER TABLE Uzytkownik ADD (
+    CONSTRAINT                      PK_Uzytkownika  PRIMARY KEY (ID_Uzytkownika)
+);
+
 CREATE TABLE Role (
     ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
     ID_Pozwolenia                   NUMBER          NOT NULL
@@ -30,20 +42,6 @@ CREATE TABLE Role (
 ALTER TABLE Role ADD (
     CONSTRAINT                      FK_Uzytkownika  FOREIGN KEY (ID_Uzytkownika)    REFERENCES Uzytkownik(ID_Uzytkownika),
     CONSTRAINT                      FK_Pozwolenia   FOREIGN KEY (ID_Pozwolenia)     REFERENCES Pozwolenia(ID_Pozwolenia)
-);
-
-CREATE TABLE Uzytkownik (
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
-    Imie_Nazwisko                   VARCHAR(64)     NOT NULL,
-    Nazwa_Wyswietlana               VARCHAR(32)     NOT NULL UNIQUE,
-    Email                           VARCHAR(254)    NOT NULL,
-    Zezwol_na_powiadomienia_email   NUMBER(1)       NOT NULL,
-    ID_Rola                         NUMBER          NOT NULL
-);
-
-ALTER TABLE Uzytkownik ADD (
-    CONSTRAINT                      PK_Uzytkownika  PRIMARY KEY (ID_Uzytkownika),
-    CONSTRAINT                      FK_Rola         FOREIGN KEY (ID_Rola) REFERENCES Role(ID_Roli)
 );
 
 CREATE TABLE Zarzadzanie_projektem (
@@ -96,7 +94,6 @@ ALTER TABLE Prioritet ADD (
     CONSTRAINT                      PK_Prioritet    PRIMARY KEY (ID_Prioritet)
 );
 
-drop table Zgloszenia;
 CREATE TABLE Zgloszenia (
     ID_Zgloszenia                   NUMBER          NOT NULL UNIQUE,
     Tytul                           VARCHAR(64)     NOT NULL,
