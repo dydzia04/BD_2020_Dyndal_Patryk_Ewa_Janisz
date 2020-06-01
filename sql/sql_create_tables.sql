@@ -24,7 +24,7 @@ ALTER TABLE Pozwolenia ADD (
 
 CREATE TABLE Role (
     ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
-    ID_Pozwolenia                   NUMBER          NOT NULL UNIQUE
+    ID_Pozwolenia                   NUMBER          NOT NULL
 );
 
 ALTER TABLE Role ADD (
@@ -100,9 +100,9 @@ CREATE TABLE Zgloszenia (
     ID_Zgloszenia                   NUMBER          NOT NULL UNIQUE,
     Tytul                           VARCHAR(64)     NOT NULL,
     Opis                            VARCHAR(254)    NOT NULL,
-    ID_Typ                          NUMBER          NOT NULL UNIQUE,
-    ID_Prioritet                    NUMBER          NOT NULL UNIQUE,
-    ID_Utworzone                    NUMBER          NOT NULL UNIQUE,
+    ID_Typ                          NUMBER          NOT NULL,
+    ID_Prioritet                    NUMBER          NOT NULL,
+    ID_Utworzone                    NUMBER          DEFAULT CURRENT_TIMESTAMP NOT NULL UNIQUE,
     ID_Zamkniete                    NUMBER          NOT NULL UNIQUE,
     Podsumowanie                    VARCHAR(254)    NOT NULL
 );
