@@ -23,13 +23,13 @@ ALTER TABLE Pozwolenia ADD (
 );
 
 CREATE TABLE Role (
-    ID_Roli                         NUMBER          NOT NULL UNIQUE,
+    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
     ID_Pozwolenia                   NUMBER          NOT NULL UNIQUE
 );
 
 ALTER TABLE Role ADD (
-    CONSTRAINT                      PK_Roli         PRIMARY KEY (ID_Roli),
-    CONSTRAINT                      FK_Pozwolenia   FOREIGN KEY (ID_Pozwolenia) REFERENCES Pozwolenia(ID_Pozwolenia)
+    CONSTRAINT                      FK_Uzytkownika  FOREIGN KEY (ID_Uzytkownika)    REFERENCES Uzytkownik(ID_Uzytkownika),
+    CONSTRAINT                      FK_Pozwolenia   FOREIGN KEY (ID_Pozwolenia)     REFERENCES Pozwolenia(ID_Pozwolenia)
 );
 
 CREATE TABLE Uzytkownik (
