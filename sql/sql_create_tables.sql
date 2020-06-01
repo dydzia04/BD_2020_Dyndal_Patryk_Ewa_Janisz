@@ -96,6 +96,7 @@ ALTER TABLE Prioritet ADD (
     CONSTRAINT                      PK_Prioritet    PRIMARY KEY (ID_Prioritet)
 );
 
+drop table Zgloszenia;
 CREATE TABLE Zgloszenia (
     ID_Zgloszenia                   NUMBER          NOT NULL UNIQUE,
     Tytul                           VARCHAR(64)     NOT NULL,
@@ -104,7 +105,8 @@ CREATE TABLE Zgloszenia (
     ID_Prioritet                    NUMBER          NOT NULL,
     ID_Utworzone                    NUMBER          ,
     ID_Zamkniete                    NUMBER          ,
-    Podsumowanie                    VARCHAR(254)    NOT NULL
+    Podsumowanie                    VARCHAR(254)    NOT NULL,
+    ID_Projektu                     NUMBER          NOT NULL
 );
 
 ALTER TABLE Zgloszenia ADD (
@@ -112,5 +114,6 @@ ALTER TABLE Zgloszenia ADD (
     CONSTRAINT                      FK_Typ          FOREIGN KEY (ID_Typ) REFERENCES Typ_Zgloszenia(ID_Typ),
     CONSTRAINT                      FK_Prioritet    FOREIGN KEY (ID_Prioritet) REFERENCES Prioritet(ID_Prioritet),
     CONSTRAINT                      FK_Utworzone    FOREIGN KEY (ID_Utworzone) REFERENCES Utworzone(ID_Utworzone),
-    CONSTRAINT                      FK_Zamkinete    FOREIGN KEY (ID_Zamkniete) REFERENCES Zamkniete(ID_Zamkniete)
+    CONSTRAINT                      FK_Zamkinete    FOREIGN KEY (ID_Zamkniete) REFERENCES Zamkniete(ID_Zamkniete),
+    CONSTRAINT                      FK_Projektu    FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu)
 );
