@@ -16,4 +16,4 @@ Kategorie -> Magazyn - Jeden do jednego - Jedna kategoria przedmiotów znajduje 
 Magazyn -> Wydział - Jeden do wielu - Wydział może mieć wiele magazynów <br/>
 Wydział -> Przesyłka - Jeden do jednego - Z jednego wybranego wydziału można wysłać 1 przesyłkę <br/>
 
-![ERD](./docs/Diagram_ERD.svg)
+![ERD Diagram](./docs/Diagram_ERD.svg)
