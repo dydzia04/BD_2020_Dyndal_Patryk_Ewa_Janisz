@@ -102,8 +102,8 @@ CREATE TABLE Zgloszenia (
     Opis                            VARCHAR(254)    NOT NULL,
     ID_Typ                          NUMBER          NOT NULL,
     ID_Prioritet                    NUMBER          NOT NULL,
-    ID_Utworzone                    NUMBER          DEFAULT CURRENT_TIMESTAMP NOT NULL UNIQUE,
-    ID_Zamkniete                    NUMBER          NOT NULL UNIQUE,
+    ID_Utworzone                    NUMBER          ,
+    ID_Zamkniete                    NUMBER          ,
     Podsumowanie                    VARCHAR(254)    NOT NULL
 );
 
