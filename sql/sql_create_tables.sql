@@ -47,13 +47,11 @@ ALTER TABLE Uzytkownik ADD (
 );
 
 CREATE TABLE Zarzadzanie_projektem (
-    ID_Zarzadzania                  NUMBER          NOT NULL UNIQUE,
-    ID_Projektu                     NUMBER          NOT NULL UNIQUE,
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE
+    ID_Projektu                     NUMBER          NOT NULL,
+    ID_Uzytkownika                  NUMBER          NOT NULL
 );
 
 ALTER TABLE Zarzadzanie_projektem ADD (
-    CONSTRAINT                      PK_Zarzadzania  PRIMARY KEY (ID_Zarzadzania),
     CONSTRAINT                      FK_Projektu     FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu),
     CONSTRAINT                      FK_Uzytkownika  FOREIGN KEY (ID_Uzytkownika) REFERENCES Uzytkownik(ID_Uzytkownika)
 );
