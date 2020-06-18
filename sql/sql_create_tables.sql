@@ -35,8 +35,8 @@ ALTER TABLE Uzytkownik ADD (
 );
 
 CREATE TABLE Role (
-    ID_Uzytkownika                  NUMBER          NOT NULL,
-    ID_Pozwolenia                   NUMBER          NOT NULL
+    ID_Uzytkownika                  RAW(16)         NOT NULL,
+    ID_Pozwolenia                   RAW(16)         NOT NULL
 );
 
 ALTER TABLE Role ADD (
@@ -45,8 +45,8 @@ ALTER TABLE Role ADD (
 );
 
 CREATE TABLE Zarzadzanie_projektem (
-    ID_Projektu                     NUMBER          NOT NULL,
-    ID_Uzytkownika                  NUMBER          NOT NULL
+    ID_Projektu                     RAW(16)         NOT NULL,
+    ID_Uzytkownika                  RAW(16)         NOT NULL
 );
 
 ALTER TABLE Zarzadzanie_projektem ADD (
@@ -56,7 +56,7 @@ ALTER TABLE Zarzadzanie_projektem ADD (
 
 CREATE TABLE Utworzone (
     ID_Utworzone                    RAW(16)         DEFAULT SYS_GUID(),
-    ID_Uzytkownika                  NUMBER          NOT NULL,
+    ID_Uzytkownika                  RAW(16)         NOT NULL,
     Czas_Utworzenia                 TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -67,7 +67,7 @@ ALTER TABLE Utworzone ADD (
 
 CREATE TABLE Zamkniete (
     ID_Zamkniete                    RAW(16)         DEFAULT SYS_GUID(),
-    ID_Uzytkownika                  NUMBER          NOT NULL,
+    ID_Uzytkownika                  RAW(16)         NOT NULL,
     Czas_Zamkniecia                 TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -98,12 +98,12 @@ CREATE TABLE Zgloszenia (
     ID_Zgloszenia                   RAW(16)         DEFAULT SYS_GUID(),
     Tytul                           VARCHAR(64)     NOT NULL,
     Opis                            VARCHAR(254)    NOT NULL,
-    ID_Typ                          NUMBER          NOT NULL,
-    ID_Prioritet                    NUMBER          NOT NULL,
-    ID_Utworzone                    NUMBER          ,
-    ID_Zamkniete                    NUMBER          ,
+    ID_Typ                          RAW(16)         NOT NULL,
+    ID_Prioritet                    RAW(16)         NOT NULL,
+    ID_Utworzone                    RAW(16)         ,
+    ID_Zamkniete                    RAW(16)         ,
     Podsumowanie                    VARCHAR(254)    NOT NULL,
-    ID_Projektu                     NUMBER          NOT NULL
+    ID_Projektu                     RAW(16)         NOT NULL
 );
 
 ALTER TABLE Zgloszenia ADD (
