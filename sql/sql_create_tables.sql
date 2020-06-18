@@ -1,5 +1,5 @@
 CREATE TABLE Projekt (
-    ID_Projektu                     NUMBER          NOT NULL UNIQUE,
+    ID_Projektu                     RAW(16)         DEFAULT SYS_GUID(),
     Opis                            VARCHAR(254)    NOT NULL,
     Czas_Modyfikacji                TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -9,7 +9,7 @@ ALTER TABLE Projekt ADD (
 );
     
 CREATE TABLE Pozwolenia (
-    ID_Pozwolenia                   NUMBER          NOT NULL UNIQUE,
+    ID_Pozwolenia                   RAW(16)         DEFAULT SYS_GUID(),
     Nazwa                           VARCHAR(128)    NOT NULL UNIQUE,
     Create_Issue                    NUMBER(1)       NOT NULL,
     Edit_own_Issue                  NUMBER(1)       NOT NULL,
@@ -23,7 +23,7 @@ ALTER TABLE Pozwolenia ADD (
 );
 
 CREATE TABLE Uzytkownik (
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
+    ID_Uzytkownika                  RAW(16)         DEFAULT SYS_GUID(),
     Imie_Nazwisko                   VARCHAR(64)     NOT NULL,
     Nazwa_Wyswietlana               VARCHAR(32)     NOT NULL UNIQUE,
     Email                           VARCHAR(254)    NOT NULL,
@@ -35,7 +35,7 @@ ALTER TABLE Uzytkownik ADD (
 );
 
 CREATE TABLE Role (
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
+    ID_Uzytkownika                  NUMBER          NOT NULL,
     ID_Pozwolenia                   NUMBER          NOT NULL
 );
 
@@ -55,8 +55,8 @@ ALTER TABLE Zarzadzanie_projektem ADD (
 );
 
 CREATE TABLE Utworzone (
-    ID_Utworzone                    NUMBER          NOT NULL UNIQUE,
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
+    ID_Utworzone                    RAW(16)         DEFAULT SYS_GUID(),
+    ID_Uzytkownika                  NUMBER          NOT NULL,
     Czas_Utworzenia                 TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -66,8 +66,8 @@ ALTER TABLE Utworzone ADD (
 );
 
 CREATE TABLE Zamkniete (
-    ID_Zamkniete                    NUMBER          NOT NULL UNIQUE,
-    ID_Uzytkownika                  NUMBER          NOT NULL UNIQUE,
+    ID_Zamkniete                    RAW(16)         DEFAULT SYS_GUID(),
+    ID_Uzytkownika                  NUMBER          NOT NULL,
     Czas_Zamkniecia                 TIMESTAMP       DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -77,7 +77,7 @@ ALTER TABLE Zamkniete ADD (
 );
 
 CREATE TABLE Typ_Zgloszenia (
-    ID_Typ                          NUMBER          NOT NULL UNIQUE,
+    ID_Typ                          RAW(16)         DEFAULT SYS_GUID(),
     Nazwa                           VARCHAR(254)    NOT NULL
 );
 
@@ -86,7 +86,7 @@ ALTER TABLE Typ_Zgloszenia ADD (
 );
 
 CREATE TABLE Prioritet (
-    ID_Prioritet                    NUMBER          NOT NULL UNIQUE,
+    ID_Prioritet                    RAW(16)         DEFAULT SYS_GUID(),
     Typ                             VARCHAR(254)    NOT NULL
 );
 
@@ -95,7 +95,7 @@ ALTER TABLE Prioritet ADD (
 );
 
 CREATE TABLE Zgloszenia (
-    ID_Zgloszenia                   NUMBER          NOT NULL UNIQUE,
+    ID_Zgloszenia                   RAW(16)         DEFAULT SYS_GUID(),
     Tytul                           VARCHAR(64)     NOT NULL,
     Opis                            VARCHAR(254)    NOT NULL,
     ID_Typ                          NUMBER          NOT NULL,
@@ -112,5 +112,5 @@ ALTER TABLE Zgloszenia ADD (
     CONSTRAINT                      FK_Prioritet    FOREIGN KEY (ID_Prioritet) REFERENCES Prioritet(ID_Prioritet),
     CONSTRAINT                      FK_Utworzone    FOREIGN KEY (ID_Utworzone) REFERENCES Utworzone(ID_Utworzone),
     CONSTRAINT                      FK_Zamkinete    FOREIGN KEY (ID_Zamkniete) REFERENCES Zamkniete(ID_Zamkniete),
-    CONSTRAINT                      FK_Projektu    FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu)
+    CONSTRAINT                      FK_Projektu     FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu)
 );
