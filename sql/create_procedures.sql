@@ -272,3 +272,65 @@ BEGIN
     
     COMMIT;
 END;
+
+
+// ----------------------------------------------
+
+
+create or replace PROCEDURE Select_User_Issues ()
+IS
+
+BEGIN
+    
+    SELECT ( zarzadzanie_projektem.id_uzytkownika, Tytul, Opis, Podsumowanie_Zgloszenia, ( SELECT typ FROM prioritet where prioritet.ID_Prioritet=zgloszenia.id_prioritet ), (SELECT nazwa FROM typ_zgloszenia where typ_zgloszenia.id_typ=zgloszenia.id_typ) ) FROM zgloszenia WHERE zgloszenia.id_projektu=zarzadzanie_projektem.id_projektu;
+    
+    COMMIT;
+END;
+
+
+// ----------------------------------------------
+
+
+create or replace PROCEDURE Select_User_Data (
+    p_id_user    IN uzytkownik.id_uzytkownika%TYPE
+)
+IS
+
+BEGIN
+    
+    SELECT ( imie_nazwisko, nazwa_wyswietlana, email, zezwol_na_powiadomienia_email ) FROM uzytkownik where id_uzytkownika=p_id_user;
+    
+    COMMIT;
+END;
+
+
+// ----------------------------------------------
+
+
+create or replace PROCEDURE Select_User_Projects (
+    p_id_user    IN uzytkownik.id_uzytkownika%TYPE
+)
+IS
+
+BEGIN
+    
+    SELECT ( projekt.opis, projekt.czas_modyfikacji ) FROM projekt INNER JOIN zarzadzanie_projektem ON zarzadzanie_projektem.id_uzytkownika=p_id_user;
+    
+    COMMIT;
+END;
+
+
+// -------------------------------------------------
+
+
+create or replace PROCEDURE Select_User_Roles (
+    p_id_user    IN uzytkownik.id_uzytkownika%TYPE
+)
+IS
+
+BEGIN
+    
+    SELECT (typ, create_issue, edit_own_issue, delete_issue, edit_any_issue, delete_any_issue) FROM pozwolenia INNER JOIN role ON role.id_uzytkownika=p_id_user; 
+    
+    COMMIT;
+END;
