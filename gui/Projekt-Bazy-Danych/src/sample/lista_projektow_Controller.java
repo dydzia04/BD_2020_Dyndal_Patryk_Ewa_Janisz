@@ -53,32 +53,7 @@ public class lista_projektow_Controller implements Initializable, ControlledScre
 
     private void wyswietl_liste()
     {
-        try (
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/kotki?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-                    "root", "toor");
-            Statement stmt = conn.createStatement();
-            )
-        {
-            lista.setEditable(false); //?
-            String query = "Select * from Projekt";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            int rowCount = 0;
-            String output = "";
-            while(rs.next())
-            {
-                int idzgloszenia = rs.getInt("ID_zgloszenia");
-                String opis = rs.getString("Opis");
-                ++rowCount;
-                lista.getItems().add("ID: " + idzgloszenia + " Tresc: " + opis);
-
-            }
-        }
-        catch(SQLException ex)
-        {
-            ex.printStackTrace();
-        }
+        System.out.println("Wyświetl liste");
     }
 
 

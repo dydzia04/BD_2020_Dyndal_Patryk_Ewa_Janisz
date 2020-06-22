@@ -39,30 +39,7 @@ public class dodajController implements Initializable, ControlledScreen {
 
     @FXML
     private void dodaj_projekt(ActionEvent event){
-        try (
-                Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/kotki?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-                        "root", "toor"); // TODO: w kazdym pliku zmien sobie ten link i user/pass zeby bylo dobrze
-                Statement stmt = conn.createStatement();
-        )
-        {
-            String opis = description.getText();
-            String id_projektu = title.getText();
-
-
-            if (!( id_projektu.isEmpty() || opis.isEmpty()))
-            {
-                stmt.clearBatch(); // TODO moze trzeba uzupelnic ponizsze jesli kolumny nie bd przyjmowaly " "
-                String dodaj = "Insert into Projekt values("+id_projektu+", '"+opis+"')";
-                stmt.executeUpdate(dodaj);
-            }
-
-        }
-        catch(SQLException ex)
-            {
-                ex.printStackTrace();
-            }
-
+        System.out.println("Dodaj projekt");
     }
 
 }

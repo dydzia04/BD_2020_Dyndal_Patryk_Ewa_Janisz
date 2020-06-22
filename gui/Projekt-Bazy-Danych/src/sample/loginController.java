@@ -14,6 +14,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,6 +50,7 @@ public class loginController implements Initializable, ControlledScreen {
          * Pobieranie wpisanych danych i sprawdzenie z bazą danych, nwm jak przesłać poprawny plik do następnych okien
          *
          */
+
        boolean is_valid =  true; //TODO zmienic na sprawdz_uzytkownika()
        if(is_valid)
        {

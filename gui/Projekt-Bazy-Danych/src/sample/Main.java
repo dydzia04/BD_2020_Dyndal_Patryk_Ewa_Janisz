@@ -53,20 +53,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
-        try {
-            SessionFactory factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            Session session = factory.openSession();
-            Transaction transaction = session.beginTransaction();
-
-            session.close();
-            factory.close();
-
-        } catch (Exception ex) {
-            StandardServiceRegistryBuilder.destroy(registry);
-        }
+        Database db = new Database();
+        db.test_connect();
         launch(args);
     }
 }
