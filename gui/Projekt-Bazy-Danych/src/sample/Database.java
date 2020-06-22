@@ -1,12 +1,17 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import java.sql.Connection;
+import java.io.IOException;
 
 public class Database {
     private final Configuration configuration = new Configuration().configure();
@@ -70,5 +75,21 @@ public class Database {
 
     public void edit_user_nazwa_wyswietlana(){
         System.out.println("Edytuje nick");
+    }
+
+
+    public void changeWindow(ActionEvent event, String resourceName){
+        Parent parent = null;
+        try {
+            parent = (AnchorPane) FXMLLoader.load(getClass().getResource(resourceName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(parent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(scene);
     }
 }

@@ -1,63 +1,35 @@
 package sample;
 
-
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class lista_projektow_Controller implements Initializable, ControlledScreen {
-    ScreensController myController;
+public class lista_projektow_Controller implements Initializable {
+    Database db = new Database();
+
     @FXML
-    ListView lista;
+    private TextField user_id;
+
     @FXML
-    TextField usuwator;
-    private String nick;
+    private ListView<?> lista;
+
+    @FXML
+    void Dodaj(ActionEvent event) {
+        db.changeWindow(event, "dodaj.fxml");
+    }
+
+    @FXML
+    void wyloguj(ActionEvent event) {
+        db.changeWindow(event, "login.fxml");
+    }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        wyswietl_liste();
+    public void initialize(URL location, ResourceBundle resources) {
+        //TODO: wczytaj listę projektów użytkownika
     }
-
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
-    }
-
-    public void setNick(String nickus_maximus) {
-        nick = nickus_maximus;
-        System.out.println(nick);
-    }
-
-    public String getNick() {
-        return nick;
-    }
-
-
-
-    @FXML
-    private void Dodaj(ActionEvent event){
-        myController.setScreen(Main.dodajID);
-    }
-
-    private void wyswietl_liste()
-    {
-        System.out.println("Wyświetl liste");
-    }
-
-
-
 }
-
-
