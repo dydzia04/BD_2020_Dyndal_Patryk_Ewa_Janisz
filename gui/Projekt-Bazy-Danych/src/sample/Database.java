@@ -17,35 +17,58 @@ public class Database {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
 
-            Connection connection = session.connection();
+//            Connection connection = session.connection();
 
         } catch (Exception ex) {
-
+            ex.getStackTrace();
         }
     }
 
     public void add_user(){
+        System.out.println("Dodaje użytkownika");
     }
 
-    public void add_issue(){}
+    public void add_issue(){
+        System.out.println("Dodaje zgłoszenie");
+    }
 
-    public void add_project(){}
+    public void add_project(){
+        System.out.println("Dodaje projekt");
+    }
 
-    public void close_project(){}
+    public void close_project(){
+        System.out.println("Zamykam projekt");
+    }
 
-    public void edit_issues_opis(){}
+    public void edit_issues_opis(){
+        System.out.println("Edytuje opis zgłoszenia");
+    }
 
-    public void edit_issues_podsumowanie(){}
+    public void edit_issues_podsumowanie(){
+        System.out.println("Edytuje podsumowanie");
+    }
 
-    public void edit_issues_tytul(){}
+    public void edit_issues_tytul(){
+        System.out.println("Edytuje tytuł");
+    }
 
-    public void edit_project_opis(){}
+    public void edit_project_opis(){
+        System.out.println("Edytuje opis projektu");
+    }
 
-    public void edit_user_email(){}
+    public void edit_user_email(){
+        System.out.println("Edytuje email");
+    }
 
-    public void edit_user_email_zgoda(){}
+    public void edit_user_email_zgoda(){
+        System.out.println("Edytuje zgodę na emial");
+    }
 
-    public void edit_user_imie_nazwisko(){}
+    public void edit_user_imie_nazwisko(){
+        System.out.println("Edytuje imie i nazwisko");
+    }
 
-    public void edit_user_nazwa_wyswietlana(){}
+    public void edit_user_nazwa_wyswietlana(){
+        System.out.println("Edytuje nick");
+    }
 }

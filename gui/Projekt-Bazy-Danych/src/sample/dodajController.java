@@ -19,6 +19,8 @@ import javafx.scene.control.TextArea;
 
 
 public class dodajController implements Initializable, ControlledScreen {
+    Database db = new Database();
+
     ScreensController myController;
     @FXML TextArea description;
     @FXML TextField  title;
@@ -39,7 +41,7 @@ public class dodajController implements Initializable, ControlledScreen {
 
     @FXML
     private void dodaj_projekt(ActionEvent event){
-        System.out.println("Dodaj projekt");
+        db.add_project();
     }
 
 }
