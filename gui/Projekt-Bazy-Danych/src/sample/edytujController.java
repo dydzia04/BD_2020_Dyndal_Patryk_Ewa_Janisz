@@ -25,7 +25,7 @@ public class edytujController {
 
     @FXML
     void go_to_base(ActionEvent event) {
-
+        db.changeWindow(event, "lista_projektow.fxml");
     }
 
 }

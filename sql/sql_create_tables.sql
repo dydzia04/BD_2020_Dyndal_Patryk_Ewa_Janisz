@@ -103,7 +103,8 @@ CREATE TABLE Zgloszenia (
     ID_Utworzone                    RAW(16)         ,
     ID_Zamkniete                    RAW(16)         ,
     Podsumowanie                    VARCHAR(254)    NOT NULL,
-    ID_Projektu                     RAW(16)         NOT NULL
+    ID_Projektu                     RAW(16)         NOT NULL,
+    ID_Tworcy                       RAW(16)         NOT NULL
 );
 
 ALTER TABLE Zgloszenia ADD (
@@ -112,5 +113,6 @@ ALTER TABLE Zgloszenia ADD (
     CONSTRAINT                      FK_Prioritet    FOREIGN KEY (ID_Prioritet) REFERENCES Prioritet(ID_Prioritet),
     CONSTRAINT                      FK_Utworzone    FOREIGN KEY (ID_Utworzone) REFERENCES Utworzone(ID_Utworzone),
     CONSTRAINT                      FK_Zamkinete    FOREIGN KEY (ID_Zamkniete) REFERENCES Zamkniete(ID_Zamkniete),
-    CONSTRAINT                      FK_Projektu     FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu)
+    CONSTRAINT                      FK_Projektu     FOREIGN KEY (ID_Projektu) REFERENCES Projekt(ID_Projektu),
+    CONSTRAINT                      FK_Tworcy       FOREIGN KEY (ID_Tworcy) REFERENCES uzytkownik(ID_Uzytkownika)
 );

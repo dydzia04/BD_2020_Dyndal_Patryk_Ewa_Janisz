@@ -13,5 +13,6 @@
       <TextField fx:id="user_id" editable="false" layoutX="430.0" layoutY="14.0" />
       <ListView fx:id="lista" layoutX="12.0" layoutY="48.0" prefHeight="268.0" prefWidth="567.0" />
       <Button layoutX="488.0" layoutY="332.0" mnemonicParsing="false" onAction="#wyloguj" prefHeight="41.0" prefWidth="91.0" text="Wyloguj" />
+      <Button layoutX="255.0" layoutY="332.0" mnemonicParsing="false" onAction="#Edytuj" prefHeight="41.0" prefWidth="91.0" text="Edytuj" />
    </children>
 </AnchorPane>

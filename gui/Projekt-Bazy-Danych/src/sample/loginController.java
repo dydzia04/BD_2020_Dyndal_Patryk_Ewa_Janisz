@@ -19,7 +19,7 @@ public class loginController {
     void zaloguj(ActionEvent event) {
         String nick = user_nick.getText();
 
-        //TODO: walidacja itp
+        db.get_user(nick);
 
         db.changeWindow(event, "lista_projektow.fxml");
     }

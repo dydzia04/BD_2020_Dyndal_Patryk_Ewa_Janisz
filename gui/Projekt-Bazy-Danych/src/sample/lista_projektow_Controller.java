@@ -23,6 +23,12 @@ public class lista_projektow_Controller implements Initializable {
         db.changeWindow(event, "dodaj.fxml");
     }
 
+
+    @FXML
+    void Edytuj(ActionEvent event) {
+        db.changeWindow(event, "edytuj.fxml");
+    }
+
     @FXML
     void wyloguj(ActionEvent event) {
         db.changeWindow(event, "login.fxml");

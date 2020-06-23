@@ -19,12 +19,6 @@ public class dodajController {
     private ListView<?> lista_zgloszen;
 
     @FXML
-    void edytuj_projekt(ActionEvent event) {
-        db.changeWindow(event, "edytuj.fxml");
-        //TODO: dodać obsługę
-    }
-
-    @FXML
     void go_to_base(ActionEvent event) {
         db.changeWindow(event, "lista_projektow.fxml");
     }
