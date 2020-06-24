@@ -16,7 +16,6 @@ public class role {
     public String getUser_id() {
         return user_id;
     }
-
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
@@ -24,7 +23,6 @@ public class role {
     public String getPermit_id() {
         return permit_id;
     }
-
     public void setPermit_id(String permit_id) {
         this.permit_id = permit_id;
     }

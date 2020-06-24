@@ -16,7 +16,6 @@ public class zarzadzanie_projektem {
     public String getUser_id() {
         return user_id;
     }
-
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
@@ -24,7 +23,6 @@ public class zarzadzanie_projektem {
     public String getProject_id() {
         return project_id;
     }
-
     public void setProject_id(String project_id) {
         this.project_id = project_id;
     }

@@ -17,7 +17,6 @@ public class typ_zgloszenia {
     public String getID() {
         return ID;
     }
-
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -25,7 +24,6 @@ public class typ_zgloszenia {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }

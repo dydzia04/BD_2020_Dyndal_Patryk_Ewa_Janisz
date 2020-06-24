@@ -17,7 +17,6 @@ public class prioritet {
     public String getID() {
         return ID;
     }
-
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -25,7 +24,6 @@ public class prioritet {
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }

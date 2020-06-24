@@ -41,7 +41,6 @@ public class zgloszenia {
     public String getID() {
         return ID;
     }
-
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -49,7 +48,6 @@ public class zgloszenia {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -57,7 +55,6 @@ public class zgloszenia {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -65,7 +62,6 @@ public class zgloszenia {
     public String getType_id() {
         return type_id;
     }
-
     public void setType_id(String type_id) {
         this.type_id = type_id;
     }
@@ -73,7 +69,6 @@ public class zgloszenia {
     public String getPriority_id() {
         return priority_id;
     }
-
     public void setPriority_id(String priority_id) {
         this.priority_id = priority_id;
     }
@@ -81,7 +76,6 @@ public class zgloszenia {
     public String getCreate_id() {
         return create_id;
     }
-
     public void setCreate_id(String create_id) {
         this.create_id = create_id;
     }
@@ -89,7 +83,6 @@ public class zgloszenia {
     public String getClose_id() {
         return close_id;
     }
-
     public void setClose_id(String close_id) {
         this.close_id = close_id;
     }
@@ -97,7 +90,6 @@ public class zgloszenia {
     public String getSummary() {
         return summary;
     }
-
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -105,7 +97,6 @@ public class zgloszenia {
     public String getProject_id() {
         return project_id;
     }
-
     public void setProject_id(String project_id) {
         this.project_id = project_id;
     }
@@ -113,7 +104,6 @@ public class zgloszenia {
     public String getAuthor_id() {
         return author_id;
     }
-
     public void setAuthor_id(String author_id) {
         this.author_id = author_id;
     }
