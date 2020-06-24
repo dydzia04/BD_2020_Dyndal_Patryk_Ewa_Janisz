@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -32,17 +33,15 @@ public class Database {
 
     public void test_connect() {
         SessionFactory factory = configuration.buildSessionFactory();
-        Session session = factory.openSession();
+
         Transaction tx = null;
 
-        try {
+        try (Session session = factory.openSession()) {
             tx = session.beginTransaction();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
         }
     }
 
@@ -53,18 +52,7 @@ public class Database {
         Session session = factory.openSession();
         Transaction tx = null;
 
-        try {
-            tx = session.beginTransaction();
 
-
-
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
 
         return false;
     }
@@ -118,40 +106,37 @@ public class Database {
         System.out.println("Szukam " + nick);
 
         SessionFactory factory = configuration.buildSessionFactory();
-        Session session = factory.openSession();
+
         Transaction tx = null;
 
-        try {
+        try (Session session = factory.openSession()) {
+
             tx = session.beginTransaction();
 
-            String hql = "FROM uzytkownik U WHERE U.nick = '" + nick + "'";
+            String hql = "select id from uzytkownik u where u.nick='" + nick + "'";
+
             Query query = session.createQuery(hql);
 
-            Integer resultNum = (Integer) query.uniqueResult();
+            System.out.println(query);
 
-            System.out.println("Ilość: " + resultNum);
+            Object result = query.getSingleResult();
 
-            if ( resultNum != null || resultNum > 0 ){
-                List result = query.list();
+            if (result != null) {
 
-                System.out.println("Użytkownik: " + result.toString());
+                sample.Session loginSession = sample.Session.getInstance();
 
-                //TODO: sprawdzić czy faktycznie znajdzie użytkownika
+                loginSession.setUserId((String) result);
+
+                System.out.println(loginSession.getUserId());
 
                 tx.commit();
 
                 return true;
             }
-
-            else {
-                System.out.println("Dupa z tego");
-            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
         return toReturn;
@@ -165,6 +150,7 @@ public class Database {
             e.printStackTrace();
         }
 
+        assert parent != null;
         Scene scene = new Scene(parent);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
