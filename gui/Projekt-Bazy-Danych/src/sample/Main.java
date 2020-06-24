@@ -22,8 +22,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Database db = new Database();
-        db.test_connect();
+//        Database db = new Database();
+//        db.test_connect();
         launch(args);
     }
 }

@@ -5,10 +5,17 @@
       <configuration>
         <datasource-map>
           <unit-entry name="gui:Projekt-Bazy-Danych:out:production:Projekt-Bazy-Danych:hibernate.cfg.xml" />
-          <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="hibernate.cfg.xml" value="81ca7bfa-3bc6-4b61-8400-3bf409406343" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/gui/Projekt-Bazy-Danych/src/hibernate.cfg.xml" />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping />
+        <naming-strategy-map />
       </configuration>
     </facet>
   </component>
@@ -19,7 +26,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="javafx-sdk-11.0" level="project" />
   </component>
 </module>

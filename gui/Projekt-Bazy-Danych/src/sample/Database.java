@@ -17,7 +17,18 @@ import java.io.IOException;
 import java.util.List;
 
 public class Database {
-    private final Configuration configuration = new Configuration().configure();
+    private final Configuration configuration = new Configuration()
+                                                    .configure()
+                                                    .addAnnotatedClass(entity.pozwolenia.class)
+                                                    .addAnnotatedClass(entity.prioritet.class)
+                                                    .addAnnotatedClass(entity.projekt.class)
+                                                    .addAnnotatedClass(entity.role.class)
+                                                    .addAnnotatedClass(entity.typ_zgloszenia.class)
+                                                    .addAnnotatedClass(entity.utworzone.class)
+                                                    .addAnnotatedClass(entity.uzytkownik.class)
+                                                    .addAnnotatedClass(entity.zamkniete.class)
+                                                    .addAnnotatedClass(entity.zarzadzanie_projektem.class)
+                                                    .addAnnotatedClass(entity.zgloszenia.class);
 
     public void test_connect() {
         SessionFactory factory = configuration.buildSessionFactory();
@@ -35,8 +46,27 @@ public class Database {
         }
     }
 
-    public void add_user() {
+    public boolean add_user( String personalne, String nick, String email, boolean zgoda) {
         System.out.println("Dodaje użytkownika");
+
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+
+
+
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return false;
     }
 
     public void add_issue() {
@@ -83,7 +113,8 @@ public class Database {
         System.out.println("Edytuje nick");
     }
 
-    public void get_user(String nick) {
+    public boolean get_user(String nick) {
+        boolean toReturn = false;
         System.out.println("Szukam " + nick);
 
         SessionFactory factory = configuration.buildSessionFactory();
@@ -93,13 +124,28 @@ public class Database {
         try {
             tx = session.beginTransaction();
 
-            String hql = "FROM uzytkownik User WHERE User.Nazwa_Wyswietlana = " + nick;
+            String hql = "FROM uzytkownik U WHERE U.nick = '" + nick + "'";
             Query query = session.createQuery(hql);
 
-            List result = query.list();
+            Integer resultNum = (Integer) query.uniqueResult();
 
-            System.out.println("Użytkownik: " + result.toString());
+            System.out.println("Ilość: " + resultNum);
 
+            if ( resultNum != null || resultNum > 0 ){
+                List result = query.list();
+
+                System.out.println("Użytkownik: " + result.toString());
+
+                //TODO: sprawdzić czy faktycznie znajdzie użytkownika
+
+                tx.commit();
+
+                return true;
+            }
+
+            else {
+                System.out.println("Dupa z tego");
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
@@ -107,6 +153,8 @@ public class Database {
         } finally {
             session.close();
         }
+
+        return toReturn;
     }
 
     public void changeWindow(ActionEvent event, String resourceName) {
