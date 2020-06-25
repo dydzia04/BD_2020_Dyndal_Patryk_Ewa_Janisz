@@ -14,7 +14,9 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="BD_2020_Dyndal_Patryk_Ewa_Janisz-master" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
