@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.hibernate.Session;
@@ -15,6 +16,8 @@ import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.*;
 
@@ -33,11 +36,12 @@ public class Database {
                                                     .addAnnotatedClass(zamkniete.class)
                                                     .addAnnotatedClass(zarzadzanie_projektem.class)
                                                     .addAnnotatedClass(zgloszenia.class);
-    private final SessionFactory factory = configuration.buildSessionFactory();
-    private final Session session = factory.openSession();
 
     // testowa pusta transkacja do debugu
     public void test_connect() {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+
         Transaction tx = null;
 
         try {
@@ -50,6 +54,10 @@ public class Database {
     }
 
     public boolean add_user( String personalne, String nick, String email, boolean zgoda) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         System.out.println("Dodaje użytkownika");
 
         ProcedureCall call = session.createStoredProcedureCall("Add_User");
@@ -61,24 +69,41 @@ public class Database {
         Integer zgodaS = zgoda ? 1 : 0;
 
         call.setParameter(1, personalne);
+        System.out.println(personalne);
         call.setParameter(2, nick);
+        System.out.println(nick);
         call.setParameter(3, email);
+        System.out.println(email);
         call.setParameter(4, zgodaS);
+        System.out.println(zgodaS);
 
         boolean error = false;
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean add_issue( String tytul, String opis, String typ, String prioritet, String podsumowanie, String ID_Projektu ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         String UserID = sample.Session.getInstance().getUserId();
 
         System.out.println("Dodaje zgłoszenie dla użytkownika "+UserID);
@@ -104,16 +129,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean add_project( String opis) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         String UserID = sample.Session.getInstance().getUserId();
 
         System.out.println("Dodaje projekt dla użytkownika "+UserID);
@@ -129,16 +167,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean close_project( String ID_Zgloszenia ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         String UserID = sample.Session.getInstance().getUserId();
 
         System.out.println("Zamykam zgłoszenie "+ ID_Zgloszenia +" użytkownika "+UserID);
@@ -154,16 +205,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_issues_podsumowanie( String ID_Zgloszenia, String podsumowanie ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         System.out.println("Edytuje podsumowanie zgłoszenia");
 
         ProcedureCall call = session.createStoredProcedureCall("Edit_Issues_Podsumowanie");
@@ -177,16 +241,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_issues_opis( String ID_Zgloszenia, String opis ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         System.out.println("Edytuje opis zgłoszenia");
 
         ProcedureCall call = session.createStoredProcedureCall("Edit_Issues_Opis");
@@ -200,16 +277,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_issues_tytul( String ID_Zgloszenia, String tytul ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         System.out.println("Edytuje tytuł zgłoszenia");
 
         ProcedureCall call = session.createStoredProcedureCall("Edit_Issues_Tytul");
@@ -223,16 +313,29 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_project_opis( String ID_Projektu, String opis ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+
         System.out.println("Edytuje opis projektu");
 
         ProcedureCall call = session.createStoredProcedureCall("Edit_Project_Opis");
@@ -246,16 +349,28 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_user_email( String email ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
 
         String UserID = sample.Session.getInstance().getUserId();
 
@@ -272,16 +387,28 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_user_email_zgoda( Integer zgoda ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
 
         String UserID = sample.Session.getInstance().getUserId();
 
@@ -298,16 +425,28 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_user_imie_nazwisko( String imie_nazwisko) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
 
         String UserID = sample.Session.getInstance().getUserId();
 
@@ -324,16 +463,28 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean edit_user_nazwa_wyswietlana( String nick ) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
 
         String UserID = sample.Session.getInstance().getUserId();
 
@@ -350,16 +501,28 @@ public class Database {
 
         try {
             call.executeUpdate();
+            tx.commit();
         }catch (Exception e){
             error = true;
-            e.getMessage();
+            if (tx != null) tx.rollback();
+
             e.getStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Błąd");
+            alert.setHeaderText("Niepoprawne dane");
+            alert.setContentText(e.getMessage());
+
+            alert.showAndWait();
         }
 
         return !error;
     }
 
     public boolean get_user(String nick) {
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+
         boolean toReturn = false;
         System.out.println("Szukam " + nick);
 
@@ -396,6 +559,33 @@ public class Database {
         }
 
         return toReturn;
+    }
+
+    public List get_projects(){
+        SessionFactory factory = configuration.buildSessionFactory();
+        Session session = factory.openSession();
+
+        String userID = sample.Session.getInstance().getUserId();
+
+        System.out.println("Szukam projektów " + userID);
+
+        Transaction tx = null;
+
+        try {
+
+            tx = session.beginTransaction();
+
+            String hql = "from zarzadzanie_projektem z where z.user_id='" + userID + "'";
+
+            Query query = session.createQuery(hql);
+
+            return query.getResultList();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            return null;
     }
 
     public void changeWindow(ActionEvent event, String resourceName) {

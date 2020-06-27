@@ -36,6 +36,6 @@ public class lista_projektow_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO: wczytaj listę projektów użytkownika
+        db.get_projects();
     }
 }
